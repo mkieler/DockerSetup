@@ -3,8 +3,8 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    image: pft-backend
-    container_name: pft-backend
+    image: laravel-app
+    container_name: laravel-app
     restart: unless-stopped
     working_dir: /var/www/html
     volumes:
@@ -14,7 +14,7 @@ services:
 
   webserver:
     image: nginx:latest
-    container_name: profiltech-app-webserver
+    container_name: nginx-webserver
     restart: unless-stopped
     ports:
       - "${APP_PORT}"
@@ -29,7 +29,7 @@ services:
 
   db:
     image: mysql:latest
-    container_name: profiltech-app-db
+    container_name: mysql-db
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
@@ -37,7 +37,7 @@ services:
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - pftdata:/var/lib/mysql
+      - dbdata:/var/lib/mysql
     networks:
       - laravel
 
@@ -45,5 +45,4 @@ networks:
   laravel:
 
 volumes:
-  pftdata:
-    driver: local
+  dbdata:
