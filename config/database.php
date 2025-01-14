@@ -82,6 +82,24 @@ return [
             ]) : [],
         ],
 
+        'wp' => [
+            'driver' => 'mysql',
+            'host' => env('WP_DB_HOST'),
+            'port' => env('WP_DB_PORT'),
+            'database' => env('WP_DB_DATABASE'),
+            'username' => env('WP_DB_USERNAME'),
+            'password' => env('WP_DB_PASSWORD'),
+            'charset' => env('WP_DB_CHARSET', 'utf8mb4'),
+            'collation' => env('WP_DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => 'wp9q_',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DB_URL'),
